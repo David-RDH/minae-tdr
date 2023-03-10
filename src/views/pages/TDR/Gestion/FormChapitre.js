@@ -29,6 +29,7 @@ const FormChapitre = () => {
                 ];
             });
         }
+        console.log(chapitres)
     };
 
     return (

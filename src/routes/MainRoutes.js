@@ -8,6 +8,7 @@ import Loadable from 'ui-component/Loadable';
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
 const Gestion = Loadable(lazy(() => import('views/pages/TDR/Gestion/Getsion')));
+const AddComponent = Loadable(lazy(() => import('views/pages/TDR/Gestion/AddComponent')));
 
 // utilities routing
 const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
@@ -31,7 +32,7 @@ const MainRoutes = {
         },
         {
             path: '/tdr/gestion',
-            element: <Gestion />
+            element: <AddComponent />
         }
     ]
 };
