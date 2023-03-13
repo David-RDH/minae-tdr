@@ -105,12 +105,16 @@ const Chapter = ({ chapter, subchapters, onAddSubchapter }) => {
                     )
                 }
 
-                <Button
-                    sx={{ ml: 2, mt: 1 }}
-                    startIcon={<AddOutlined />}
-                    variant="contained"
-                    onClick={handleAddSubchapter}
-                >Ajouter le sous-chapitre</Button>
+                {
+                    chapterType === 'text' && (
+                        <Button
+                            sx={{ ml: 2, mt: 1 }}
+                            startIcon={<AddOutlined />}
+                            variant="contained"
+                            onClick={handleAddSubchapter}
+                        >Ajouter le sous-chapitre</Button>
+                    )
+                }
             </Paper>
             {
                 subchapters.length > 0 && (
