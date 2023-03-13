@@ -3,14 +3,14 @@ import MainCard from 'ui-component/cards/MainCard';
 import {
     Button,
     TextField,
-    Paper, 
-    ToggleButtonGroup, 
-    ToggleButton, 
-    Stack, 
-    Table, 
-    TableHead, 
-    TableRow, 
-    TableCell, 
+    Paper,
+    ToggleButtonGroup,
+    ToggleButton,
+    Stack,
+    Table,
+    TableHead,
+    TableRow,
+    TableCell,
     TableBody,
     TableContainer
 } from '@mui/material';
@@ -19,6 +19,7 @@ import { styled } from '@mui/material/styles';
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import BudgetTable from './BudgetTable';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -95,6 +96,12 @@ const Chapter = ({ chapter, subchapters, onAddSubchapter }) => {
                                 console.log(data);
                             }}
                         />
+                    )
+                }
+
+                {
+                    chapterType === 'table' && (
+                        <BudgetTable/>
                     )
                 }
 
