@@ -1,4 +1,4 @@
-import { 
+import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Modal, Box,
   TextField
 } from "@mui/material";
@@ -60,7 +60,7 @@ const BudgetTable = (show) => {
   }
 
   const handleAddNewRow = () => {
-    let newID = newRow.id+1
+    let newID = newRow.id + 1
     setnewRow({
       id: newID,
       designation: '',
@@ -78,7 +78,7 @@ const BudgetTable = (show) => {
       quantite: newRow.quantite,
       pu: newRow.pu,
       nb_jour: newRow.nb_jour,
-      total: newRow.pu*newRow.nb_jour*newRow.quantite,
+      total: newRow.pu * newRow.nb_jour * newRow.quantite,
       obs: newRow.obs
     }])
   }
@@ -93,19 +93,46 @@ const BudgetTable = (show) => {
       >
         <Box sx={modalStyle}>
           <div>
-            <TextField sx={inputStyle.large} name="designation" value={newRow.designation} onChange={(e) => setnewRow({...newRow, designation: e.target.value})} size="small" id="outlined-basic" label="Designation" variant="outlined" />
-            <TextField sx={inputStyle.large} name="obs" value={newRow.obs} onChange={(e) => setnewRow({...newRow, obs: e.target.value})} size="small" id="outlined-basic" label="Observation" variant="outlined" />
+            <TextField
+              sx={inputStyle.large}
+              name="designation" value={newRow.designation}
+              onChange={(e) => setnewRow({ ...newRow, designation: e.target.value })}
+              size="small" id="outlined-basic" label="Designation" variant="outlined" />
+            <TextField
+              sx={inputStyle.large}
+              name="obs" value={newRow.obs}
+              onChange={(e) => setnewRow({ ...newRow, obs: e.target.value })}
+              size="small" id="outlined-basic" label="Observation" variant="outlined" />
           </div>
           <div>
-            <TextField sx={inputStyle.small} name="unite" value={newRow.unite} onChange={(e) => setnewRow({...newRow, unite: e.target.value})} size="small" id="outlined-basic" label="Unité" variant="outlined" />
-            <TextField sx={inputStyle.small} name="quantite" value={newRow.quantite} onChange={(e) => setnewRow({...newRow, quantite: parseInt(e.target.value)})} size="small" type="number" id="outlined-basic" label="Quantité" variant="outlined" />
-            <TextField sx={inputStyle.small} name="pu" value={newRow.pu} onChange={(e) => setnewRow({...newRow, pu: parseInt(e.target.value)})} size="small" type="number" id="outlined-basic" label="Prix unitaire" variant="outlined" />
-            <TextField sx={inputStyle.small} name="nb_jour" value={newRow.nb_jour} onChange={(e) => setnewRow({...newRow, nb_jour: parseInt(e.target.value)})} size="small" type="number" id="outlined-basic" label="Nombre de jour" variant="outlined" />
+            <TextField
+              sx={inputStyle.small}
+              name="unite" value={newRow.unite}
+              onChange={(e) => setnewRow({ ...newRow, unite: e.target.value })}
+              size="small" id="outlined-basic" label="Unité" variant="outlined" />
+            <TextField
+              sx={inputStyle.small}
+              name="quantite" value={newRow.quantite}
+              onChange={(e) => setnewRow({ ...newRow, quantite: parseInt(e.target.value) })}
+              size="small" type="number" id="outlined-basic" label="Quantité" variant="outlined" />
+            <TextField
+              sx={inputStyle.small}
+              name="pu" value={newRow.pu}
+              onChange={(e) => setnewRow({ ...newRow, pu: parseInt(e.target.value) })}
+              size="small" type="number" id="outlined-basic" label="Prix unitaire" variant="outlined" />
+            <TextField
+              sx={inputStyle.small}
+              name="nb_jour" value={newRow.nb_jour}
+              onChange={(e) => setnewRow({ ...newRow, nb_jour: parseInt(e.target.value) })}
+              size="small" type="number" id="outlined-basic" label="Nombre de jour" variant="outlined" />
           </div>
           <Button variant="contained" onClick={handleAddNewRow}>Ajouter</Button>
         </Box>
       </Modal>
-      <MainCard title="Tableau de budget" secondary={<Button variant="contained" onClick={handleOpen}>+</Button>}>
+      <MainCard title="Tableau de budget" secondary={
+        <Button  sx={{ ml: 2, mt: 1 }}
+        startIcon={<AddOutlined />} variant="contained" onClick={handleOpen}>Entrer les lignes</Button>
+      }>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -140,10 +167,17 @@ const BudgetTable = (show) => {
           </Table>
         </TableContainer>
         <Button
-            sx={{ ml: 2, mt: 1 }}
-            startIcon={<AddOutlined />}
-            variant="contained"
-        >Ajouter le sous-chapitre</Button>
+          sx={{ ml: 2, mt: 1 }}
+          startIcon={<AddOutlined />}
+          variant="contained"
+        >Enregistrer</Button>
+        <Button
+          color='error'
+          sx={{ ml: 2, mt: 1 }}
+          variant="contained"
+        >
+          Annuler
+        </Button>
       </MainCard>
     </div>
   );
