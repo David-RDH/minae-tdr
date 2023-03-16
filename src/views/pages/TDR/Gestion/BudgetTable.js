@@ -50,6 +50,12 @@ const BudgetTable = (show) => {
     obs: ''
   });
 
+  const [afficherTableau, setAfficherTableau] = useState(false);
+
+  const SaveTable = () => {
+    setAfficherTableau(!afficherTableau);
+  };
+
   const totaux = () => {
     let value = 0
     allRows.forEach(r => {
@@ -170,14 +176,8 @@ const BudgetTable = (show) => {
           sx={{ ml: 2, mt: 1 }}
           startIcon={<AddOutlined />}
           variant="contained"
+          onClick={SaveTable}
         >Enregistrer</Button>
-        <Button
-          color='error'
-          sx={{ ml: 2, mt: 1 }}
-          variant="contained"
-        >
-          Annuler
-        </Button>
       </MainCard>
     </div>
   );
