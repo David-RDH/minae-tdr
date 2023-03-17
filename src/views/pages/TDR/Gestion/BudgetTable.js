@@ -6,8 +6,9 @@ import {
 import MainCard from 'ui-component/cards/MainCard';
 import { AddOutlined } from '@mui/icons-material';
 import { useState } from 'react';
+import FinalTable from "../FinalTable";
 
-const BudgetTable = (show) => {
+const BudgetTable = () => {
   // start modal setup
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -39,6 +40,7 @@ const BudgetTable = (show) => {
   // end modal setup
 
   const [allRows, setAllRows] = useState([])
+  const [finalRows, setFinalRows] = useState([])
   const [newRow, setnewRow] = useState({
     id: 0,
     designation: '',
@@ -51,10 +53,13 @@ const BudgetTable = (show) => {
   });
 
   const [afficherTableau, setAfficherTableau] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const SaveTable = () => {
-    setAfficherTableau(!afficherTableau);
-  };
+  // const SaveTable = () => {
+  //   setAfficherTableau(!afficherTableau);
+  //   setIsOpen(true)
+
+  // };
 
   const totaux = () => {
     let value = 0
@@ -136,8 +141,8 @@ const BudgetTable = (show) => {
         </Box>
       </Modal>
       <MainCard title="Tableau de budget" secondary={
-        <Button  sx={{ ml: 2, mt: 1 }}
-        startIcon={<AddOutlined />} variant="contained" onClick={handleOpen}>Entrer les lignes</Button>
+        <Button sx={{ ml: 2, mt: 1 }}
+          startIcon={<AddOutlined />} variant="contained" onClick={handleOpen}>Entrer les lignes</Button>
       }>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
@@ -176,8 +181,16 @@ const BudgetTable = (show) => {
           sx={{ ml: 2, mt: 1 }}
           startIcon={<AddOutlined />}
           variant="contained"
-          onClick={SaveTable}
+          onClick={() => {
+            setIsOpen(true)
+            setFinalRows(allRows)  
+            setAllRows([])
+          }}
         >Enregistrer</Button>
+        <FinalTable
+          isOpen={isOpen}
+          allRows={finalRows}
+        />
       </MainCard>
     </div>
   );

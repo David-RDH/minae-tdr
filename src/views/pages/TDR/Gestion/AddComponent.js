@@ -20,6 +20,7 @@ import { styled } from '@mui/material/styles';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import BudgetTable from './BudgetTable';
+import FinalTable from '../FinalTable';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -33,6 +34,8 @@ const Chapter = ({ chapter, subchapters, onAddSubchapter }) => {
     const [newSubchapter, setNewSubchapter] = useState('');
     const [chapterType, setchapterType] = useState('text')
     const [valueSubchapter, setValueSubchapter] = useState('');
+    
+
 
     const handleAddSubchapter = () => {
         if (newSubchapter.trim() !== '') {
@@ -101,7 +104,7 @@ const Chapter = ({ chapter, subchapters, onAddSubchapter }) => {
 
                 {
                     chapterType === 'table' && (
-                        <BudgetTable/>
+                            <BudgetTable />
                     )
                 }
 
@@ -116,6 +119,7 @@ const Chapter = ({ chapter, subchapters, onAddSubchapter }) => {
                     )
                 }
             </Paper>
+            
             {
                 subchapters.length > 0 && (
                     <TableContainer>
