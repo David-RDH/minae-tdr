@@ -5,7 +5,7 @@ import FormChapitre from './FormChapitre';
 
 const Gestion = () => {
     return (
-        <MainCard title="Gestion des TDR" secondary={<Button>btn</Button>}>
+        <MainCard title="LISTES DES TDR" secondary={<Button>btn</Button>}>
             <FormChapitre />
         </MainCard>
     );

@@ -1,14 +1,14 @@
 // assets
-import { IconDashboard, IconShadow } from '@tabler/icons';
+import { IconFiles, IconListDetails } from '@tabler/icons';
 
 // constant
-const icons = { IconDashboard, IconShadow };
+const icons = { IconFiles, IconListDetails };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
 const tdr = {
     id: 'tdr',
-    title: 'TDR',
+    title: 'Gérer les TDR',
     type: 'group',
     caption: 'A propos TDR',
     children: [
@@ -17,7 +17,7 @@ const tdr = {
             title: 'Listes ',
             type: 'item',
             url: '/tdr/list',
-            icon: icons.IconDashboard,
+            icon: icons.IconListDetails,
             breadcrumbs: false
         },
         {
@@ -25,7 +25,7 @@ const tdr = {
             title: 'Gestion ',
             type: 'item',
             url: '/tdr/gestion',
-            icon: icons.IconShadow,
+            icon: icons.IconFiles,
             breadcrumbs: false
         }
     ]
