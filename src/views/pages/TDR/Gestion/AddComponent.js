@@ -22,6 +22,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import BudgetTable from './BudgetTable';
 import FinalTable from '../FinalTable';
 
+
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,

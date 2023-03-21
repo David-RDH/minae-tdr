@@ -1,9 +1,5 @@
 {
-    "type": "sqlite",
-    "database": "path/to/database.sqlite",
-    "synchronize": true,
-    "logging": false,
-    "entities": [
-      "src/entities/*.ts"
-    ]
-  }
+  "type": "sqlite",
+  "database": "path/to/database/file.sqlite",
+  "entities": ["path/to/entity/files/*.js"]
+}
