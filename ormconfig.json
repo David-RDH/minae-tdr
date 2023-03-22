@@ -1,5 +1,0 @@
-{
-  "type": "sqlite",
-  "database": "path/to/database/file.sqlite",
-  "entities": ["path/to/entity/files/*.js"]
-}
