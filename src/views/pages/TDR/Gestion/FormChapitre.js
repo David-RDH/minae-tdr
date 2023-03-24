@@ -6,6 +6,8 @@ import { IconDashboard, IconShadow } from '@tabler/icons';
 import { useEffect } from 'react';
 import FormSubChapitre from './FormSubChapitre';
 import { AddOutlined } from '@mui/icons-material';
+import { Component } from 'react';
+import db from './tdr.sqlite';
 
 const FormChapitre = () => {
     const [chapitre, setChapitre] = useState(null);
@@ -31,7 +33,39 @@ const FormChapitre = () => {
         }
         console.log(chapitres)
     };
-
+//interaction
+    
+class App extends Component {
+    constructor(props) {
+      super(props);
+  
+      this.state = {
+        Nom: '',
+      };
+  
+      this.handleNomChange = this.handleNomChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
+    }
+  
+    handleNomChange(event) {
+      this.setState({ Nom: event.target.value });
+    }
+  
+    handleSubmit(event) {
+      event.preventDefault();
+      const { Nom } = this.state;
+      const sql = 'INSERT INTO Chapitre (Nom) VALUES (?)';
+      db.run(sql, [Nom], (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('Chapitre ajouter avec succe');
+          this.setState({ Nom: '' });
+        }
+      });
+    }
+  
+    render() {
     return (
         <Box>
             <Box
@@ -114,6 +148,8 @@ const FormChapitre = () => {
             </Modal>
         </Box>
     );
+    }      
+}
 };
 
 export default FormChapitre;

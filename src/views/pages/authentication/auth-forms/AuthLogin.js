@@ -36,6 +36,9 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import Google from 'assets/images/icons/social-google.svg';
 
+import React, { Component } from 'react';
+import db from './tdr.sqlite';
+
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
@@ -57,6 +60,46 @@ const FirebaseLogin = ({ ...others }) => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
+//interaction avec la db
+    class App extends Component {
+        constructor(props) {
+        super(props);
+
+            this.state = {
+            email: '',
+            password: '',
+         };
+     }
+
+        handleChange = (event) => {
+    const { Nom, value } = event.target;
+            this.setState({
+            [Nom]: value,
+         });
+     };
+
+        handleSubmit = (event) => {
+        event.preventDefault();
+    const { email, password } = this.state;
+        db.get('SELECT * FROM Utilisateurs WHERE email = ? AND password = ?', [email, password], (err, row) => {
+            if (err) {
+                console.log(err);
+            } else if (row) {
+                console.log(`Connexion réussie en tant que${row.Nom}.`);
+
+        // Stocker l'identifiant de l'utilisateur connecté dans le stockage local
+        localStorage.setItem('idUtilisateurs', row.id);
+
+        // Rediriger l'utilisateur vers la page d'accueil
+        window.location.href = '/login';
+      } else {
+        console.log(' email ou password invalide.');
+      }
+    });
+  };
+
+  render() {
 
     return (
         <>
@@ -118,6 +161,7 @@ const FirebaseLogin = ({ ...others }) => {
                     </Box>
                 </Grid> */}
             </Grid>
+
 
             <Formik
                 initialValues={{
@@ -246,6 +290,8 @@ const FirebaseLogin = ({ ...others }) => {
             </Formik>
         </>
     );
+    }
+}
 };
-
+    
 export default FirebaseLogin;
