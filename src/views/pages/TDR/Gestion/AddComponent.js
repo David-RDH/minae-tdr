@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MainCard from 'ui-component/cards/MainCard';
 import {
     Button,
@@ -22,6 +22,9 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import BudgetTable from './BudgetTable';
 import FinalTable from '../FinalTable';
 
+import mitt from 'mitt';
+
+let emitter = mitt();
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -35,8 +38,6 @@ const Chapter = ({ chapter, subchapters, onAddSubchapter }) => {
     const [newSubchapter, setNewSubchapter] = useState('');
     const [chapterType, setchapterType] = useState('text')
     const [valueSubchapter, setValueSubchapter] = useState('');
-    
-
 
     const handleAddSubchapter = () => {
         if (newSubchapter.trim() !== '') {
@@ -105,7 +106,7 @@ const Chapter = ({ chapter, subchapters, onAddSubchapter }) => {
 
                 {
                     chapterType === 'table' && (
-                            <BudgetTable />
+                        <BudgetTable emitter={emitter} />
                     )
                 }
 
@@ -120,7 +121,7 @@ const Chapter = ({ chapter, subchapters, onAddSubchapter }) => {
                     )
                 }
             </Paper>
-            
+
             {
                 subchapters.length > 0 && (
                     <TableContainer>
@@ -154,6 +155,13 @@ const Chapter = ({ chapter, subchapters, onAddSubchapter }) => {
 }
 
 const Chapters = () => {
+
+    useEffect(() => {
+        emitter.on('saveBudgetTable', (data) => {
+            console.log(data);
+        });
+    }, []); // tableau de dépendances vide pour n'exécuter qu'une fois
+
     const [newChapter, setNewChapter] = useState('');
     const [chapters, setChapters] = useState([]);
 

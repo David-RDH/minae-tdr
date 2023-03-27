@@ -6,9 +6,11 @@ import {
 import MainCard from 'ui-component/cards/MainCard';
 import { AddOutlined } from '@mui/icons-material';
 import { useState } from 'react';
-import FinalTable from "../FinalTable";
+
+import mitt from "mitt";
 
 const BudgetTable = () => {
+  let emitter = mitt();
   // start modal setup
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -40,7 +42,6 @@ const BudgetTable = () => {
   // end modal setup
 
   const [allRows, setAllRows] = useState([])
-  const [finalRows, setFinalRows] = useState([])
   const [newRow, setnewRow] = useState({
     id: 0,
     designation: '',
@@ -92,6 +93,10 @@ const BudgetTable = () => {
       total: newRow.pu * newRow.nb_jour * newRow.quantite,
       obs: newRow.obs
     }])
+  }
+
+  const handleSaveAll = () => {
+    emitter.emit('saveBudgetTable', allRows);
   }
 
   return (
@@ -181,16 +186,8 @@ const BudgetTable = () => {
           sx={{ ml: 2, mt: 1 }}
           startIcon={<AddOutlined />}
           variant="contained"
-          onClick={() => {
-            setIsOpen(true)
-            setFinalRows(allRows)  
-            setAllRows([])
-          }}
+          onClick={handleSaveAll}
         >Enregistrer</Button>
-        <FinalTable
-          isOpen={isOpen}
-          allRows={finalRows}
-        />
       </MainCard>
     </div>
   );

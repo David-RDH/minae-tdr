@@ -3,7 +3,10 @@
         "experimentalDecorators": true,
         "target": "esnext",
         "module": "commonjs",
-        "baseUrl": "src"
+        "baseUrl": "src",
+        "paths": {
+            "@/database/*": ["src/database/*"],
+        }
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules"]
