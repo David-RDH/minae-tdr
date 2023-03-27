@@ -36,7 +36,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import Google from 'assets/images/icons/social-google.svg';
 
-import React, { Component } from 'react';
 import db from './tdr.sqlite';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
@@ -61,48 +60,31 @@ const FirebaseLogin = ({ ...others }) => {
         event.preventDefault();
     };
 
-//interaction avec la db
-    class App extends Component {
-        constructor(props) {
-        super(props);
+    // interaction avec la base de données
+    const handleSubmit = async (values) => {
+        try {
+            db.get('SELECT * FROM Utilisateurs WHERE email = ? AND password = ?', [values.email, values.password], (err, row) => {
+                if (err) {
+                    console.log(err);
+                } else if (row) {
+                    console.log(`Connexion réussie en tant que ${row.Nom}.`);
 
-            this.state = {
-            email: '',
-            password: '',
-         };
-     }
+                    // Stocker l'identifiant de l'utilisateur connecté dans le stockage local
+                    localStorage.setItem('idUtilisateurs', row.id);
 
-        handleChange = (event) => {
-    const { Nom, value } = event.target;
-            this.setState({
-            [Nom]: value,
-         });
-     };
+                    // Rediriger l'utilisateur vers la page d'accueil
+                    window.location.href = '/login';
+                } else {
+                    console.log('Email ou mot de passe invalide.');
+                }
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
-        handleSubmit = (event) => {
-        event.preventDefault();
-    const { email, password } = this.state;
-        db.get('SELECT * FROM Utilisateurs WHERE email = ? AND password = ?', [email, password], (err, row) => {
-            if (err) {
-                console.log(err);
-            } else if (row) {
-                console.log(`Connexion réussie en tant que${row.Nom}.`);
-
-        // Stocker l'identifiant de l'utilisateur connecté dans le stockage local
-        localStorage.setItem('idUtilisateurs', row.id);
-
-        // Rediriger l'utilisateur vers la page d'accueil
-        window.location.href = '/login';
-      } else {
-        console.log(' email ou password invalide.');
-      }
-    });
-  };
-
-  render() {
-
-    return (
-        <>
+    return (        
+            <>
             <Grid container direction="column" justifyContent="center" spacing={2}>
                 {/* <Grid item xs={12}>
                     <AnimateButton>
@@ -291,7 +273,6 @@ const FirebaseLogin = ({ ...others }) => {
         </>
     );
     }
-}
-};
+
     
 export default FirebaseLogin;

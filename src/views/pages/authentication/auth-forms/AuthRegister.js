@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -36,8 +36,8 @@ import { strengthColor, strengthIndicator } from 'utils/password-strength';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-import React, { Component } from 'react';
 import db from './tdr.sqlite';
+
 // ===========================|| FIREBASE - REGISTER ||=========================== //
 
 const FirebaseRegister = ({ ...others }) => {
@@ -74,87 +74,76 @@ const FirebaseRegister = ({ ...others }) => {
     }, []);
 
     //interaction bd
-    class App extends Component {
-        constructor(props) {
-          super(props);
-      
-          this.state = {
-            Utilisateurs: [],
-            Nom: '',
-            Prenom:'',
-            Email: '',
-            Password: '',
-          };
-      
-          this.handleNomChange = this.handleNomChange.bind(this);
-          this.handlePrenomChange = this.handlePrenomChange.bind(this);
-          this.handleEmailChange = this.handleEmailChange.bind(this);
-          this.handlePasswordChange = this.handlePasswordChange.bind(this);
-          this.handleSubmit = this.handleSubmit.bind(this);
-        }
-      
-        componentDidMount() {
-          db.all('SELECT * FROM Utilisateurs', [], (err, rows) => {
-            if (err) {
-              console.log(err);
-            } else {
-              this.setState({
-                users: rows,
-              });
-            }
-          });
-        }
-      
-        handleNomChange(event) {
-          this.setState({ Nom: event.target.value });
-        }
+    function FirebaseRegister() {
+        const [Utilisateurs, setUtilisateurs] = useState([]);
+        const [Nom, setNom] = useState('');
+        const [Prenom, setPrenom] = useState('');
+        const [Email, setEmail] = useState('');
+        const [Password, setPassword] = useState('');
 
-        handlePrenomChange(event) {
-            this.setState({ Prenom: event.target.value });
-          }
-
-        handleEmailChange(event) {
-          this.setState({ Email: event.target.value });
-        }
-      
-        handlePasswordChange(event) {
-          this.setState({ Password: event.target.value });
-        }
-      
-        handleSubmit(event) {
-          event.preventDefault();
-      
-          // enregistrer l'utilisateurs dans la bd
-          db.run(
-            'INSERT INTO Utilisateurs (Nom, Prenom, Email, Password) VALUES (?, ?, ?)',
-            [this.state.Nom, this.state.Prenom, this.state.Email, this.state.Password],
-            (err) => {
-              if (err) {
-                console.log(err);
-              } else {
-                // Recharger la liste des utilisateurs de la bd
-                db.all('SELECT * FROM Utilisateurs', [], (err, rows) => {
-                  if (err) {
+        useEffect(() => {
+            db.all('SELECT * FROM Utilisateurs', [], (err, rows) => {
+                if (err) {
                     console.log(err);
-                  } else {
-                    this.setState({
-                      Utilisateurs: rows,
-                      Nom: '',
-                      Prenom: '',
-                      Email: '',
-                      Password: '',
-                    });
-                  }
-                });
-              }
-            }
-          );
-        }
-      
-        render() {
+                } else {
+                    setUtilisateurs(rows);
+                }
+            });
+        }, []);
 
-    return (
-        <>
+        const handleSubmit = (event) => {
+            event.preventDefault();
+
+            // enregistrer l'utilisateurs dans la bd
+            db.run(
+                'INSERT INTO Utilisateurs (Nom, Prenom, Email, Password) VALUES (?, ?, ?, ?)',
+                [Nom, Prenom, Email, Password],
+                (err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        // Recharger la liste des utilisateurs de la bd
+                        db.all('SELECT * FROM Utilisateurs', [], (err, rows) => {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                setUtilisateurs(rows);
+                                setNom('');
+                                setPrenom('');
+                                setEmail('');
+                                setPassword('');
+                            }
+                        });
+                    }
+                }
+            );
+        };
+
+        const handleNomChange = (event) => {
+            setNom(event.target.value);
+        };
+
+        const handlePrenomChange = (event) => {
+            setPrenom(event.target.value);
+            
+            const handleEmailChange = (event) => {
+                setEmail(event.target.value);
+            };
+        
+            const handlePasswordChange = (event) => {
+                setPassword(event.target.value);
+                changePassword(event.target.value);
+            };
+        
+            const validationSchema = Yup.object().shape({
+                nom: Yup.string().required('Le nom est requis'),
+                prenom: Yup.string().required('Le prénom est requis'),
+                email: Yup.string().email('Email invalide').required('L\'email est requis'),
+                password: Yup.string().min(8, 'Le mot de passe doit contenir au moins 8 caractères').required('Le mot de passe est requis')
+            });
+        
+            return (
+            <>
             <Grid container direction="column" justifyContent="center" spacing={2}>
                 {/* <Grid item xs={12}>
                     <AnimateButton>
