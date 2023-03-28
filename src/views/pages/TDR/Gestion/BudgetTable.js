@@ -182,6 +182,7 @@ const BudgetTable = () => {
             </TableBody>
           </Table>
         </TableContainer>
+        <pre>{JSON.stringify(allRows)}</pre>
         <Button
           sx={{ ml: 2, mt: 1 }}
           startIcon={<AddOutlined />}
