@@ -5,7 +5,7 @@
         "module": "commonjs",
         "baseUrl": "src",
         "paths": {
-            "@/database/*": ["src/database/*"],
+            "@/database/*": ["src/database/*"]
         }
     },
     "include": ["src/**/*"],
