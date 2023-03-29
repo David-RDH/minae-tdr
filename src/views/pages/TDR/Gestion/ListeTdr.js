@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import sqlite3 from 'sqlite3';
+import db from './tdr.sqlite';
 
 function ListeTdr() {
-  const [tdrNames, setTdrNames] = useState([]);
+  const [tdrs, setTdrs] = useState([]);
 
   useEffect(() => {
-    const db = sqlite3('tdr.sqlite');
-    const query = db.prepare('SELECT name FROM files WHERE tdr_result IS NOT NULL');
-    const results = query.all();
-    setTdrNames(results);
+    db.all('SELECT * FROM tdr', [], (err, rows) => {
+      if (err) {
+        console.error(err.message);
+      }
+      setTdrs(rows);
+    });
   }, []);
+
+  const handleClick = (id) => {
+    // Afficher les détails de la TDR avec l'ID donné
+  }
 
   return (
     <div>
-      <h2>TDR Noms</h2>
-      <ul>
-        {tdrNames.map((tdrName, index) => (
-          <li key={index}>
-            {tdrName.name}
-          </li>
-        ))}
-      </ul>
+      {tdrs.map((tdr) => (
+        <div key={tdr.id} onClick={() => handleClick(tdr.id)}>
+          {tdr.id}: {tdr.contenu}
+        </div>
+      ))}
     </div>
   );
 }
