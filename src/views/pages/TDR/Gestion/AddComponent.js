@@ -20,7 +20,7 @@ import { styled } from '@mui/material/styles';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import BudgetTable from './BudgetTable';
-import FinalTable from '../FinalTable';
+// import FinalTable from '../FinalTable';
 
 import mitt from 'mitt';
 
@@ -191,9 +191,45 @@ const Chapters = () => {
         console.log(chapters)
     }
 
+    const handleSave = () => {
+        const data = { /* mettre toutes les données utilisateur ici */ };
+        fetch('page de destination', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => {
+          if (response.ok) {
+            console.log('Données envoyées avec succès!');
+          } else {
+            console.error('Une erreur s\'est produite lors de l\'envoi des données.');
+          }
+        })
+        .catch(error => {
+          console.error('Une erreur s\'est produite lors de l\'envoi des données:', error);
+        });
+      }
+
     return (
         <div>
-            <MainCard title="CREATION D'UN TDR" secondary={<Button onClick={handleSaveAll}>ENREGISTRER</Button>}>
+            <MainCard title="CREATION D'UN TDR" secondary={<Button sx={{ ml: 2, mt: 1 }}
+                startIcon={<AddOutlined />}
+                variant="contained"
+                onClick={handleSave}>ENREGISTRER</Button>}>
+                    <h1>Nom</h1>
+                    <div>
+                        <TextField
+                        type="text"
+                        label="Nom de tdr"
+                        />
+                        <Button
+                        sx={{ ml: 2, mt: 1}}
+                        startIcon={<AddOutlined/>}
+                        variant="contained"
+                        >Creer</Button>
+                    </div>
                 <h1>Chapitres</h1>
                 <div>
                     <TextField

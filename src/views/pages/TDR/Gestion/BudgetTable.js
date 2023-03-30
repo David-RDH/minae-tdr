@@ -99,6 +99,8 @@ const BudgetTable = () => {
     emitter.emit('saveBudgetTable', allRows);
   }
 
+  console.log(JSON.stringify(allRows));  
+
   return (
     <div>
       <Modal
