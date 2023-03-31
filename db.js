@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 
 // Créer une instance de base de données SQLite
-const db = new sqlite3.Database('tdr.sqlite');
+const db = new sqlite3.Database('../../../../database/tdr.sqlite');
 
 //creation des tables
 // Créer la table "utilisateurs"

@@ -75,7 +75,7 @@ const FirebaseLogin = ({ ...others }) => {
                     localStorage.setItem('idUtilisateurs', row.id);
 
                     // Rediriger l'utilisateur vers la page d'accueil
-                    window.location.href = '/login';
+                    window.location.href = '/tdr/Liste';
                 } else {
                     console.log('Email ou mot de passe invalide.');
                 }

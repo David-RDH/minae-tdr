@@ -229,7 +229,7 @@ const FirebaseRegister = ({ ...others }) => {
                                     fullWidth
                                     label="Nom"
                                     margin="normal"
-                                    name="fname"
+                                    name="nom"
                                     type="text"
                                     defaultValue=""
                                     sx={{ ...theme.typography.customInput }}
@@ -240,7 +240,7 @@ const FirebaseRegister = ({ ...others }) => {
                                     fullWidth
                                     label="Prénom"
                                     margin="normal"
-                                    name="lname"
+                                    name="prenom"
                                     type="text"
                                     defaultValue=""
                                     sx={{ ...theme.typography.customInput }}
@@ -363,7 +363,7 @@ const FirebaseRegister = ({ ...others }) => {
                                     variant="contained"
                                     color="secondary"
                                 >
-                                    S'inscrire
+                                    S'inscrire1
                                 </Button>
                             </AnimateButton>
                         </Box>

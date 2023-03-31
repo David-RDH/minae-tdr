@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import db from './tdr.sqlite';
+import db from '../../../../database/tdr.sqlite';
 
 function AffichageTdr({ tdrId }) {
   const [tdr, setTdr] = useState(null);
