@@ -99,6 +99,8 @@ const BudgetTable = () => {
     emitter.emit('saveBudgetTable', allRows);
   }
 
+  console.log(JSON.stringify(allRows));  
+
   return (
     <div>
       <Modal
@@ -182,6 +184,7 @@ const BudgetTable = () => {
             </TableBody>
           </Table>
         </TableContainer>
+        <pre>{JSON.stringify(allRows)}</pre>
         <Button
           sx={{ ml: 2, mt: 1 }}
           startIcon={<AddOutlined />}

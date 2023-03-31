@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -35,7 +35,6 @@ import { strengthColor, strengthIndicator } from 'utils/password-strength';
 // assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
 import db from '../../../../database/tdr.sqlite'
 
 // ===========================|| FIREBASE - REGISTER ||=========================== //
@@ -73,77 +72,77 @@ const FirebaseRegister = ({ ...others }) => {
         changePassword('123456');
     }, []);
 
-    //interaction bd
-    function FirebaseRegister() {
-        const [Utilisateurs, setUtilisateurs] = useState([]);
-        const [Nom, setNom] = useState('');
-        const [Prenom, setPrenom] = useState('');
-        const [Email, setEmail] = useState('');
-        const [Password, setPassword] = useState('');
+//   //interaction bd
+//   function FirebaseRegister() {
+//     const [Utilisateurs, setUtilisateurs] = useState([]);
+//     const [Nom, setNom] = useState('');
+//     const [Prenom, setPrenom] = useState('');
+//     const [Email, setEmail] = useState('');
+//     const [Password, setPassword] = useState('');
 
-        useEffect(() => {
-            db.all('SELECT * FROM Utilisateurs', [], (err, rows) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    setUtilisateurs(rows);
-                }
-            });
-        }, []);
+//     useEffect(() => {
+//         db.all('SELECT * FROM Utilisateurs', [], (err, rows) => {
+//             if (err) {
+//                 console.log(err);
+//             } else {
+//                 setUtilisateurs(rows);
+//             }
+//         });
+//     }, []);
 
-        const handleSubmit = (event) => {
-            event.preventDefault();
+//     const handleSubmit = (event) => {
+//         event.preventDefault();
 
-            // enregistrer l'utilisateurs dans la bd
-            db.run(
-                'INSERT INTO Utilisateurs (Nom, Prenom, Email, Password) VALUES (?, ?, ?, ?)',
-                [Nom, Prenom, Email, Password],
-                (err) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        // Recharger la liste des utilisateurs de la bd
-                        db.all('SELECT * FROM Utilisateurs', [], (err, rows) => {
-                            if (err) {
-                                console.log(err);
-                            } else {
-                                setUtilisateurs(rows);
-                                setNom('');
-                                setPrenom('');
-                                setEmail('');
-                                setPassword('');
-                            }
-                        });
-                    }
-                }
-            );
-        };
+//         // enregistrer l'utilisateurs dans la bd
+//         db.run(
+//             'INSERT INTO Utilisateurs (nom, prenom, email, password) VALUES (?, ?, ?, ?)',
+//             [Nom, Prenom, Email, Password],
+//             (err) => {
+//                 if (err) {
+//                     console.log(err);
+//                 } else {
+//                     // Recharger la liste des utilisateurs de la bd
+//                     db.all('SELECT * FROM Utilisateurs', [], (err, rows) => {
+//                         if (err) {
+//                             console.log(err);
+//                         } else {
+//                             setUtilisateurs(rows);
+//                             setNom('');
+//                             setPrenom('');
+//                             setEmail('');
+//                             setPassword('');
+//                         }
+//                     });
+//                 }
+//             }
+//         );
+//     };
 
-        const handleNomChange = (event) => {
-            setNom(event.target.value);
-        };
+//     const handleNomChange = (event) => {
+//         setNom(event.target.value);
+//     };
 
-        const handlePrenomChange = (event) => {
-            setPrenom(event.target.value);
-            
-            const handleEmailChange = (event) => {
-                setEmail(event.target.value);
-            };
+//     const handlePrenomChange = (event) => {
+//         setPrenom(event.target.value);
         
-            const handlePasswordChange = (event) => {
-                setPassword(event.target.value);
-                changePassword(event.target.value);
-            };
-        
-            const validationSchema = Yup.object().shape({
-                nom: Yup.string().required('Le nom est requis'),
-                prenom: Yup.string().required('Le prénom est requis'),
-                email: Yup.string().email('Email invalide').required('L\'email est requis'),
-                password: Yup.string().min(8, 'Le mot de passe doit contenir au moins 8 caractères').required('Le mot de passe est requis')
-            });
-        
-            return (
-            <>
+//         const handleEmailChange = (event) => {
+//             setEmail(event.target.value);
+//         };
+    
+//         const handlePasswordChange = (event) => {
+//             setPassword(event.target.value);
+//             changePassword(event.target.value);
+//         };
+    
+//         const validationSchema = Yup.object().shape({
+//             nom: Yup.string().required('Le nom est requis'),
+//             prenom: Yup.string().required('Le prénom est requis'),
+//             email: Yup.string().email('Email invalide').required('L\'email est requis'),
+//             password: Yup.string().min(8, 'Le mot de passe doit contenir au moins 8 caractères').required('Le mot de passe est requis')
+//         });
+
+    return (
+        <>
             <Grid container direction="column" justifyContent="center" spacing={2}>
                 {/* <Grid item xs={12}>
                     <AnimateButton>
@@ -248,7 +247,7 @@ const FirebaseRegister = ({ ...others }) => {
                             </Grid>
                         </Grid>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-register">adresse Email</InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-email-register">Adresse Email</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-email-register"
                                 type="email"
@@ -372,8 +371,6 @@ const FirebaseRegister = ({ ...others }) => {
             </Formik>
         </>
     );
-    }
-}
 };
 
 export default FirebaseRegister;

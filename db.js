@@ -1,16 +1,16 @@
 const sqlite3 = require('sqlite3').verbose();
 
+
 // Créer une instance de base de données SQLite
 const db = new sqlite3.Database('../../../../database/tdr.sqlite');
-
 //creation des tables
 // Créer la table "utilisateurs"
 db.run(`CREATE TABLE  'Utilisateurs' (
-    'idUtilisateurs' INTEGER    PRIMARY KEY AUTOINCREMENT,
-    'Email' LINESTRING UNIQUE,
-    'Password' LINESTRING,
-    'Nom' TEXT (200),
-    'Prenom' TEXT
+    'id' INTEGER    PRIMARY KEY AUTOINCREMENT,
+    'email' LINESTRING UNIQUE,
+    'password' LINESTRING,
+    'nom' TEXT (200),
+    'prenom' TEXT
 )`,
 (err) => {
     if (err) {
@@ -22,9 +22,9 @@ db.run(`CREATE TABLE  'Utilisateurs' (
 
 // Créer la table "tdr"
 db.run(`CREATE TABLE 'Tdr' (
-    'idTdr' INTEGER PRIMARY KEY AUTOINCREMENT,
-    'Nom' TEXT (200),
-    'Utilisateurs_id' INTEGER REFERENCES 'Utilisateurs' (idUtilisateurs) 
+    'id' INTEGER PRIMARY KEY AUTOINCREMENT,
+    'nom' TEXT (200),
+    'Utilisateurs_id' INTEGER REFERENCES 'Utilisateurs' (id) 
 )`,
 (err) => {
     if (err) {
@@ -37,10 +37,10 @@ db.run(`CREATE TABLE 'Tdr' (
 
 // Créer la table "Chapitre"
 db.run(`CREATE TABLE 'Chapitre' (
-  'idChapitre' INTEGER PRIMARY KEY AUTOINCREMENT,
-  'tdr_id' INTEGER REFERENCES 'tdr' (idTdr),
-  'Nom' TEXT,
-  'Contenu' LONGTEXT
+  'id' INTEGER PRIMARY KEY AUTOINCREMENT,
+  'tdr_id' INTEGER REFERENCES 'tdr' (id),
+  'nom' TEXT,
+  'contenu' LONGTEXT
 )`, (err) => {
   if (err) {
     console.log('Table déjà créée');
@@ -52,9 +52,10 @@ db.run(`CREATE TABLE 'Chapitre' (
 // Créer la table "SousChapitre"
 db.run(`CREATE TABLE 'SousChapitre' (
   'idSousChapitre' INTEGER PRIMARY KEY AUTOINCREMENT,
-  'Nom' TEXT,
-  'Type' TEXT,
-  'Valeur' LONGTEXT
+  'Chapitres_id' INTEGER REFERENCES 'Chapitres' (id),
+  'nom' TEXT,
+  'type' TEXT,
+  'contenu' LONGTEXT
 )`, (err) => {
   if (err) {
     console.log('Table déjà créée');
