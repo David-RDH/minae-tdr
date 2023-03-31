@@ -76,7 +76,7 @@ const FirebaseLogin = ({ ...others }) => {
 
                     // Rediriger l'utilisateur vers la page d'accueil
 
-                    window.location.href = '/tdr/Liste';
+                    window.location.href = '/tdr/list';
                 } else {
                     console.log('Email ou mot de passe invalide.');
                 }
