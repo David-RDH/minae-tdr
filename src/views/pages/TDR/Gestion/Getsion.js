@@ -1,14 +1,25 @@
-import { Button } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
+import { TextField } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
-import Liste from './Liste';
 // import FormChapitre from './FormChapitre';
-
+// import ListeTdr from './ListeTdr';
+// import AffichageTdr from './AffichageTdr';
 const Gestion = () => {
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleChange = (event) => {
+        setSearchTerm(event.target.value);
+      };
     return (
-        <MainCard title="LISTES DES TDR" secondary={<Button>btn</Button>}>
+        <MainCard title="LISTES DES TDR" secondary={  <TextField
+            label="Rechercher"
+            value={searchTerm}
+            onChange={handleChange}
+            sx={{ ml: 2, mt: 1 }}
+          />}>
             {/* <FormChapitre /> */}
-            <Liste/>
+            {/* <ListeTdr/> */}
+            {/* <AffichageTdr/> */}
         </MainCard>
     );
 };

@@ -36,9 +36,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import Google from 'assets/images/icons/social-google.svg';
 
-//import db from './tdr.sqlite';
-
-import db from '../../../../database/tdr.sqlite'
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
@@ -62,28 +59,28 @@ const FirebaseLogin = ({ ...others }) => {
         event.preventDefault();
     };
 
-    // interaction avec la base de données
-    const handleConnect = async (values) => {
-        try {
-            db.get('SELECT * FROM Utilisateurs WHERE email = ? AND password = ?', [values.email, values.password], (err, row) => {
-                if (err) {
-                    console.log(err);
-                } else if (row) {
-                    console.log(`Connexion réussie en tant que ${row.nom}.`);
+    // // interaction avec la base de données
+    // const handleConnect = async (values) => {
+    //     try {
+    //         db.get('SELECT * FROM Utilisateurs WHERE email = ? AND password = ?', [values.email, values.password], (err, row) => {
+    //             if (err) {
+    //                 console.log(err);
+    //             } else if (row) {
+    //                 console.log(`Connexion réussie en tant que ${row.nom}.`);
 
-                    // Stocker l'identifiant de l'utilisateur connecté dans le stockage local
-                    localStorage.setItem('id', row.id);
+    //                 // Stocker l'identifiant de l'utilisateur connecté dans le stockage local
+    //                 localStorage.setItem('id', row.id);
 
-                    // Rediriger l'utilisateur vers la page d'accueil
-                    window.location.href = '/tdr/list';
-                } else {
-                    console.log('Email ou mot de passe invalide.');
-                }
-            });
-        } catch (err) {
-            console.error(err);
-        }
-    };
+    //                 // Rediriger l'utilisateur vers la page d'accueil
+    //                 window.location.href = '/tdr/list';
+    //             } else {
+    //                 console.log('Email ou mot de passe invalide.');
+    //             }
+    //         });
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // };
 
     return (        
             <>
@@ -259,7 +256,6 @@ const FirebaseLogin = ({ ...others }) => {
                                     to="/tdr/list"
                                     disableElevation
                                     disabled={isSubmitting}
-                                    onClick={handleConnect}
                                     fullWidth
                                     size="large"
                                     type="submit"

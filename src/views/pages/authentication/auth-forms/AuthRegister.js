@@ -35,7 +35,6 @@ import { strengthColor, strengthIndicator } from 'utils/password-strength';
 // assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import db from '../../../../database/tdr.sqlite'
 
 // ===========================|| FIREBASE - REGISTER ||=========================== //
 

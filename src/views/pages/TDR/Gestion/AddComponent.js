@@ -225,6 +225,7 @@ const Chapters = () => {
                         label="Nom de tdr"
                         />
                         <Button
+                        type="submit"
                         sx={{ ml: 2, mt: 1}}
                         startIcon={<AddOutlined/>}
                         variant="contained"
