@@ -71,7 +71,6 @@ const FirebaseLogin = ({ ...others }) => {
     //                 // Stocker l'identifiant de l'utilisateur connecté dans le stockage local
     //                 localStorage.setItem('id', row.id);
 
-<<<<<<< HEAD
     //                 // Rediriger l'utilisateur vers la page d'accueil
     //                 window.location.href = '/tdr/list';
     //             } else {
@@ -82,19 +81,6 @@ const FirebaseLogin = ({ ...others }) => {
     //         console.error(err);
     //     }
     // };
-=======
-                    // Rediriger l'utilisateur vers la page d'accueil
-
-                    window.location.href = '/tdr/list';
-                } else {
-                    console.log('Email ou mot de passe invalide.');
-                }
-            });
-        } catch (err) {
-            console.error(err);
-        }
-    };
->>>>>>> 8df0c1d543f42134844f226036671ff206a4aada
 
     return (        
             <>
