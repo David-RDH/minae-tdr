@@ -18,39 +18,9 @@ import localDB from 'composable/localDb';
 const myDB = new localDB()
 
 // factory of table chapters
-let chapters = myDB.all('tdr_lists')
-if (chapters === null) {
-    myDB.insert('tdr_lists', [])
-    /**
-     * format table => tdr_lists (output array)
-     * [
-     *   {
-     *      id: 1,
-     *      nom; 'TDR 1',
-     *      user_id: 1,
-     *      chapters: [
-     *          {
-     *              name: 'Chapitre 1',
-     *              subchapter: [
-     *                  {
-     *                      name: 'Conception',
-     *                      type: 'text',
-     *                      value: '<p>Hello</p>'
-     *                  },
-     *                  {
-     *                      name: 'Budget',
-     *                      type: 'table',
-     *                      value: [{"id":1,"designation":"credit","unite":"credit","quantite":1,"pu":10000,"nb_jour":21,"total":210000,"obs":"com"}]
-     *                  }
-     *              ]
-     *          }
-     *      ]
-     *   }
-     * ]
-     */
-} else {
-    console.log(myDB.all('tdr_lists'))
-}
+myDB.initTable('tdr_lists')
+
+console.log(myDB.all('tdr_lists'))
 
 // ==============================|| REACT DOM RENDER  ||============================== //
 

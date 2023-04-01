@@ -10,10 +10,17 @@ export default class localDB {
     }
 
     insert = (table_name, data) => {
-        // il faut que data contient les colonnes identiques pour la tablea `table_name`
+        // il faut que data contient les colonnes identiques pour la table `table_name`
         const allData = this.all(table_name)
         allData.push(data)
         localStorage.setItem(table_name, JSON.stringify(allData) )
+        return true
+    }
+
+    initTable = (table_name) => {
+        if (localStorage.getItem(table_name) == null) {
+            localStorage.setItem(table_name, JSON.stringify([]) )
+        }
         return true
     }
 
